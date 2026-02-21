@@ -2,12 +2,16 @@ import WebSocket from "ws";
 
 const ws = new WebSocket("ws://localhost:8080");
 
-ws.on("message", (data) => {
-  console.log("Serverdan xabar:", data.toString());
-
-  ws.send("Xabar olindi, rahmat!");
+ws.on("open", () => {
+  console.log("We connected to the server!");
 });
 
-ws.on("open", () => {
-  console.log("Serverga ulandik!");
+ws.on("message", (data) => {
+  const msg = JSON.parse(data.toString());
+
+  if (msg.type === "REGISTERED") {
+    console.log("My tunnel ID:", msg.id);
+  }
+
+  ws.send("Hello from the client!");
 });
