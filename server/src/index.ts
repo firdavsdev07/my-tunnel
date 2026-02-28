@@ -2,7 +2,7 @@ import { WebSocketServer } from "ws";
 import { v4 as uuid } from "uuid";
 const wss = new WebSocketServer({ port: 8080 });
 
-console.log("Simple tunnel server running on ws://localhost:8080");
+console.log("server running on ws://localhost:8080");
 
 const clients = new Map<string, any>();
 
